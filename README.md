@@ -1,12 +1,12 @@
 <form>
-  <label>Imie</label>
+  <label>Imie:</label><br>
   <input type=text id=imie>
-  <label>Nazwisko</label>
+  <label>Nazwisko:</label><br>
   <input type=text id=imie>
-  <label>E-mail</label>
+  <label>E-mai:l</label><br>
   <input type=text id=email>
-  <label>Opis problemu</label>
+  <label>Opis problemu:</label><br>
   <input type=text id=problem>
-  <label>Priorytet</label>
+  <label>Priorytet:</label><br>
   <inpu type=text id=priorytet>
 </form>
