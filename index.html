@@ -1,30 +1,47 @@
-<form>
+<form id="myForm">
   <label>Imie: </label>
-  <input type=text id=imie name=imie><br>
+  <input type="text" id="imie" name="imie"><br>
+  
   <label>Nazwisko: </label>
-  <input type=text id=nazwisko name=nazwisko><br>
-  <label>E-mai: </label>
-  <input type=text id=email name=email><br>
+  <input type="text" id="nazwisko" name="nazwisko"><br>
+  
+  <label>E-mail: </label>
+  <input type="email" id="email" name="email"><br>
+  
   <label>Opis problemu: </label>
-  <input type=text id=problem name=problem><br>
+  <input type="text" id="problem" name="problem"><br>
+  
   <label>Priorytet: </label>
-  <input type=text id=priorytet name=priorytet><br>
-  <form action="https://hook.eu1.make.com/18bar33dg1fy2k9pmlsidf5jk58jitzt" method="POST">
-  <button type=submit>Wyslij zgloszenie</button><br>
+  <input type="text" id="priorytet" name="priorytet"><br>
+  
+  <button type="submit">Wyslij zgloszenie</button>
 </form>
-  <script>
+
+<script>
 document.getElementById('myForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+  e.preventDefault(); // Zatrzymuje przeładowanie strony
   
   const formData = new FormData(this);
   const data = Object.fromEntries(formData.entries());
 
   fetch('https://hook.eu1.make.com/18bar33dg1fy2k9pmlsidf5jk58jitzt', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify(data)
   })
-  .then(response => alert('Dane wysłane!'))
-  .catch(error => console.error('Błąd:', error));
+  .then(response => {
+    if (response.ok) {
+      alert('Zgłoszenie zostało wysłane pomyślnie!');
+      this.reset(); // Czyści formularz po wysłaniu
+    } else {
+      alert('Wystąpił błąd przy wysyłaniu.');
+    }
+  })
+  .catch(error => {
+    console.error('Błąd:', error);
+    alert('Błąd połączenia z serwerem.');
+  });
 });
 </script>
