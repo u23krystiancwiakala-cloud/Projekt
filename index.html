@@ -12,3 +12,19 @@
   <form action="https://hook.eu1.make.com/18bar33dg1fy2k9pmlsidf5jk58jitzt" method="POST">
   <button type=submit>Wyslij zgloszenie</button><br>
 </form>
+  <script>
+document.getElementById('myForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  fetch('https://hook.eu1.make.com/18bar33dg1fy2k9pmlsidf5jk58jitzt', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(response => alert('Dane wysłane!'))
+  .catch(error => console.error('Błąd:', error));
+});
+</script>
