@@ -14,34 +14,33 @@
   <label>Priorytet: </label>
   <input type="text" id="priorytet" name="priorytet" required><br>
 
-  <!-- Ukryte pole na ID, które zostanie wysłane do Make -->
+
+  <label for="generatedIdInput">ID zgłoszenia: </label>
+  <span id="wyswietlaczID" style="font-weight: bold; color: blue;">---</span><br>
   <input type="hidden" id="generatedIdInput" name="id_zgloszenia">
 
   <button type="button" onclick="generuj()">Wygeneruj ID</button>
   <button type="submit">Wyslij zgloszenie</button>
 </form>
 
-<p id="wyswietlaczID"></p> <!-- Tutaj pokaże się numer -->
-
 <script>
-
 function generuj() {
     let ostatnieID = localStorage.getItem('mojeID') || 0;
     let noweID = parseInt(ostatnieID) + 1;
     localStorage.setItem('mojeID', noweID);
     
-   
+    
     document.getElementById('generatedIdInput').value = noweID;
-    document.getElementById('wyswietlaczID').innerText = "Numer Twojego zgłoszenia to: " + noweID;
+    
+    
+    document.getElementById('wyswietlaczID').innerText = noweID;
 }
-
 
 document.getElementById('myForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   const formData = new FormData(this);
   const data = Object.fromEntries(formData.entries());
-
 
   if (!data.id_zgloszenia) {
       alert("Najpierw wygeneruj ID!");
@@ -57,7 +56,8 @@ document.getElementById('myForm').addEventListener('submit', function(e) {
     if (response.ok) {
       alert('Zgłoszenie nr ' + data.id_zgloszenia + ' zostało wysłane!');
       this.reset();
-      document.getElementById('wyswietlaczID').innerText = ""; 
+      // Resetowanie wizualnego ID po wysłaniu
+      document.getElementById('wyswietlaczID').innerText = "---"; 
     } else {
       alert('Wystąpił błąd przy wysyłaniu.');
     }
