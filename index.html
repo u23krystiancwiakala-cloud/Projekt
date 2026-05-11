@@ -13,7 +13,8 @@
   
   <label>Priorytet: </label>
   <input type="text" id="priorytet" name="priorytet" required><br>
-  
+
+  <button type="submit" onclick=generuj() required>Wygeneruj ID</button>
   <button type="submit">Wyslij zgloszenie</button>
 </form>
 
@@ -44,4 +45,11 @@ document.getElementById('myForm').addEventListener('submit', function(e) {
     alert('Błąd połączenia z serwerem.');
   });
 });
+<script>
+    function generujID() {
+        let ostatnieID = localStorage.getItem('mojeID') || 0;
+        let noweID = parseInt(ostatnieID) + 1;
+        localStorage.setItem('mojeID', noweID);
+        document.write("Numer Twojego zgłoszenia to: " + noweID);
+    }
 </script>
